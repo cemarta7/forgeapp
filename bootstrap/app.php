@@ -18,27 +18,14 @@ return Application::configure(basePath: dirname(__DIR__))
             \Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,
         ]);
 
-        $environment = env('APP_ENV');
+        $middleware->trustProxies(
+            at: '*',
+            headers: Request::HEADER_X_FORWARDED_FOR |
+                Request::HEADER_X_FORWARDED_HOST |
+                Request::HEADER_X_FORWARDED_PORT |
+                Request::HEADER_X_FORWARDED_PROTO
+        );
 
-        switch ($environment) {
-            case 'production':
-                $middleware->trustProxies(
-                    at: '*',
-                    headers: Request::HEADER_X_FORWARDED_FOR |
-                        Request::HEADER_X_FORWARDED_HOST |
-                        Request::HEADER_X_FORWARDED_PORT |
-                        Request::HEADER_X_FORWARDED_PROTO
-                );
-                break;
-
-            default:
-                // Local/Development Configuration
-                $middleware->trustProxies(
-                    at: ['127.0.0.1', '::1'],
-                    headers: Request::HEADER_X_FORWARDED_FOR |
-                        Request::HEADER_X_FORWARDED_PROTO
-                );
-        }
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
