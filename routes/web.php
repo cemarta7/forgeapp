@@ -14,6 +14,15 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 });
+Route::get('/debug', function () {
+    return [
+        'isSecure' => request()->isSecure(),
+        'scheme' => request()->getScheme(),
+        'url' => url('/test'),
+        'x-forwarded-proto' => request()->header('X-Forwarded-Proto'),
+    ];
+});
+
 
 Route::middleware([
     'auth:sanctum',
