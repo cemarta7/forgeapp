@@ -21,4 +21,4 @@ Artisan::command('get:public-ip', function () {
     ]);
 });
 
-Schedule::command('get:public-ip')->everyMinute();
+Schedule::command('get:public-ip')->OnOneServer()->withoutOverlapping()->everyMinute();
