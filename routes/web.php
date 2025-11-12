@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\JobStatusController;
 use App\Http\Controllers\UploadImageController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +33,10 @@ Route::middleware([
     Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
     Route::get('/image_list', [DashboardController::class, 'showImages'])->name('image_list');
     Route::get('/logs', [DashboardController::class, 'showLogs'])->name('logs');
+    
+    Route::get('/jobs', [JobStatusController::class, 'index'])->name('job_status');
+    Route::get('/jobs/stats', [JobStatusController::class, 'stats'])->name('job_stats');
+    Route::post('/jobs/dispatch', [JobStatusController::class, 'dispatch'])->name('job_dispatch');
 
     Route::resource('images', UploadImageController::class);
 });

@@ -24,6 +24,7 @@ import { Link } from '@inertiajs/vue3';
                         <div class="flex flex-col gap-2">
                             <Link :href="route('image_list')" class="px-4 py-2 w-32 text-white bg-blue-500 rounded-md">Images</Link>
                             <Link :href="route('logs')" class="px-4 py-2 w-32 text-white bg-blue-500 rounded-md">Logs</Link>
+                            <Link :href="route('job_status')" class="px-4 py-2 w-32 text-white bg-blue-500 rounded-md">Jobs</Link>
                         </div>
                     </div>
                 </div>
